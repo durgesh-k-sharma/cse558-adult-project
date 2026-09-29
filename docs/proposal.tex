@@ -96,6 +96,14 @@ reproducible preparation study.
 The target has 37,155 records at or below USD 50,000 (76.1\%) and 11,687 above
 USD 50,000 (23.9\%). The full data dictionary appears in Appendix~\ref{app:dict}.
 
+\subsection{Exploration and confirmation split}
+
+We split before exploration and stratified on \code{income}. The exploration
+partition contains \textbf{39,073 rows (80.0\%)} and the confirmation partition
+contains \textbf{9,769 rows (20.0\%)}. The seed is \seedvalue, defined once in
+\code{src/config.py}. All figures use exploration rows. Confirmation remains
+closed until the hypothesis and analysis choices are fixed.
+
 \clearpage
 \section{Data preparation}
 
@@ -150,14 +158,6 @@ raw predictors from the candidate model matrix: the redundant \code{education}
 field and the sampling-weight field \code{fnlwgt}. It gains explicit missing
 categories and one column per nominal category. Source top-coding means the
 true capital-gain values above USD 99,999 cannot be recovered.
-
-\section{Exploration and confirmation split}
-
-We split before exploration and stratified on \code{income}. The exploration
-partition contains \textbf{39,073 rows (80.0\%)} and the confirmation partition
-contains \textbf{9,769 rows (20.0\%)}. The seed is \seedvalue, defined once in
-\code{src/config.py}. All figures use exploration rows. Confirmation remains
-closed until the hypothesis and analysis choices are fixed.
 
 \section{Exploratory analysis}
 
