@@ -1,0 +1,17 @@
+[project]
+name = "cse558-adult-project"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2,<4",
+    "pyarrow>=18,<25",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+    "ruff>=0.11,<1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

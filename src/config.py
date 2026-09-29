@@ -1,0 +1,7 @@
+"""Shared project configuration."""
+
+SEED = 558
+CONFIRMATION_FRACTION = 0.20
+SOURCE_ARCHIVE_SHA256 = (
+    "7537312dd56c2b98035880805ce99e68183a30ee468aa5329d6df0fbb3cc21bb"
+)
