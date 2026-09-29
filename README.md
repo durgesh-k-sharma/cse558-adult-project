@@ -23,6 +23,19 @@ The split seed, ratio, and reason are recorded in `docs/decisions.md`. Use only
 exploration rows for EDA. Do not inspect confirmation rows until hypotheses
 have been fixed.
 
+## Explore and draft the proposal
+
+After preparing the split, regenerate the exploration-only PDF figures used in
+the proposal with:
+
+```bash
+uv run python -m src.analysis.explore
+```
+
+The command writes `reports/figures/income_by_sex.pdf` and
+`reports/figures/income_by_education_num.pdf`. Both figures use exploration
+rows only.
+
 ## Development checks
 
 ```bash
