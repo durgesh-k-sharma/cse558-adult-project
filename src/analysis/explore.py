@@ -44,12 +44,16 @@ def _write_pdf_bar_chart(
     chart_height = height - top - bottom
     bar_gap = chart_width / len(labels)
     bar_width = min(38.0, bar_gap * 0.62)
-    commands = ["1 1 1 rg", f"0 0 {width} {height} re f"]
+    commands = [
+        "1 1 1 rg",
+        f"0 0 {width} {height} re f",
+        "0.12 0.16 0.22 rg",
+    ]
 
     def text(x: float, y: float, size: float, value: str) -> str:
         return f"BT /F1 {size:g} Tf {x:.2f} {y:.2f} Td ({_pdf_escape(value)}) Tj ET"
 
-    commands.append(text(width / 2 - len(title) * 4.2, height - 30, 15, title))
+    commands.append(text(width / 2 - len(title) * 4.6, height - 30, 16, title))
     for tick in range(0, 101, 20):
         y = bottom + chart_height * tick / 100
         commands.extend(
@@ -57,13 +61,13 @@ def _write_pdf_bar_chart(
                 "0.84 0.87 0.91 RG 0.5 w",
                 f"{left} {y:.2f} m {width - right} {y:.2f} l S",
                 "0.20 0.25 0.31 rg",
-                text(left - 38, y - 3, 9, f"{tick}%"),
+                text(left - 38, y - 4, 11, f"{tick}%"),
             ]
         )
     for index, (label, value) in enumerate(zip(labels, values, strict=True)):
         center = left + bar_gap * (index + 0.5)
         bar_height = chart_height * value
-        y = bottom + chart_height - bar_height
+        bar_top = bottom + bar_height
         commands.extend(
             [
                 "0.20 0.48 0.72 rg",
@@ -72,15 +76,17 @@ def _write_pdf_bar_chart(
                     f"{bar_height:.2f} re f"
                 ),
                 "0.12 0.16 0.22 rg",
-                text(center - 12, y + 6, 9, f"{value:.1%}"),
-                text(center - len(label) * 2.5, bottom - 18, 9, label),
+                text(
+                    center - len(f"{value:.1%}") * 2.8, bar_top + 5, 10, f"{value:.1%}"
+                ),
+                text(center - len(label) * 3.0, bottom - 20, 11, label),
             ]
         )
     commands.extend(
         [
             "0.12 0.16 0.22 rg",
-            text(width / 2 - len(x_label) * 3, 24, 10, x_label),
-            "BT /F1 10 Tf 0 1 -1 0 18 155 Tm (Share earning above $50K) Tj ET",
+            text(width / 2 - len(x_label) * 3.3, 22, 11, x_label),
+            "BT /F1 11 Tf 0 1 -1 0 18 155 Tm (Share earning above $50K) Tj ET",
         ]
     )
     stream = ("\n".join(commands) + "\n").encode("ascii")

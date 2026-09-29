@@ -9,3 +9,10 @@ data/processed/*
 !data/interim/.gitkeep
 !data/processed/.gitkeep
 *.py[cod]
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.xdv

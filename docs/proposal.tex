@@ -3,8 +3,7 @@
 \usepackage{fontspec}
 \setmainfont{Bitstream Charter}
 \setsansfont{Latin Modern Sans}
-\usepackage{microtype}
-\usepackage[a4paper,margin=2.3cm,headheight=14pt]{geometry}
+\usepackage[a4paper,margin=2.3cm,headheight=22pt]{geometry}
 \usepackage[table]{xcolor}
 \definecolor{ink}{gray}{0.15}
 \definecolor{rule}{gray}{0.75}
@@ -97,6 +96,7 @@ reproducible preparation study.
 The target has 37,155 records at or below USD 50,000 (76.1\%) and 11,687 above
 USD 50,000 (23.9\%). The full data dictionary appears in Appendix~\ref{app:dict}.
 
+\clearpage
 \section{Data preparation}
 
 The table records proposed steps. The encoding and predictor choices have not
@@ -156,20 +156,19 @@ true capital-gain values above USD 99,999 cannot be recovered.
 We split before exploration and stratified on \code{income}. The exploration
 partition contains \textbf{39,073 rows (80.0\%)} and the confirmation partition
 contains \textbf{9,769 rows (20.0\%)}. The seed is \seedvalue, defined once in
-\code{src/config.py}. Every figure below uses exploration rows only. We will
-keep confirmation results closed until the hypothesis and analysis choices are
-fixed.
+\code{src/config.py}. All figures use exploration rows. Confirmation remains
+closed until the hypothesis and analysis choices are fixed.
 
 \section{Exploratory analysis}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.48\textwidth}
+\begin{subfigure}[t]{0.98\textwidth}
   \centering
   \includegraphics[width=\linewidth]{../reports/figures/income_by_sex.pdf}
   \caption{\takeaway{The exploratory above-USD-50,000 rate is 19.1 percentage points higher for males.} The rates are 30.3\% (7,908/26,132) for males and 11.1\% (1,441/12,941) for females.}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.48\textwidth}
+\end{subfigure}\\[4pt]
+\begin{subfigure}[t]{0.98\textwidth}
   \centering
   \includegraphics[width=\linewidth]{../reports/figures/income_by_education_num.pdf}
   \caption{\takeaway{The above-USD-50,000 rate spans 72.9 percentage points across education levels.} It ranges from 1.6\% at level 1 (1/64) to 74.5\% at level 15 (493/662).}
@@ -190,7 +189,7 @@ Anyone familiar with this dataset would ask:
 \subsection{Problem statement}
 
 \begin{enumerate}[label=\textbf{P\arabic*.},leftmargin=2.4em]
-  \item \textbf{Primary.} Among Adult records, does the association between ordinal education level (\code{education-num}) and income above USD 50,000 differ by sex after adjustment for age and hours worked per week?
+  \item \textbf{Primary.} Does the association between \code{education-num} and income above USD 50,000 differ by sex? We will estimate it after adjusting for age and hours worked per week.
 \end{enumerate}
 
 \textbf{Why P1 is not on the obvious list.} P1 asks whether the education association differs by sex after adjustment for age and work hours. The obvious questions ask only about marginal patterns. We will make one confirmatory claim to avoid unnecessary multiple testing.
@@ -227,7 +226,7 @@ split seed is \seedvalue, and the raw archive remains unchanged. Run
 \code{uv run python -m src.data.prepare} to recreate the split and
 \code{uv run python -m src.analysis.explore} to regenerate the two proposal
 figures. The archive SHA-256 is
-\code{7537312dd56c2b98035880805ce99e68183a30ee468aa5329d6df0fbb3cc21bb}.
+\texttt{7537312d\allowbreak d56c2b98\allowbreak 03580805\allowbreak ce99e681\allowbreak 83a30ee4\allowbreak 685aa532\allowbreak 9d6df0fb\allowbreak b3cc21bb}.
 Project repository: \url{https://github.com/durgesh-k-sharma/cse558-adult-project}.
 
 \begin{thebibliography}{9}\small
@@ -235,6 +234,7 @@ Project repository: \url{https://github.com/durgesh-k-sharma/cse558-adult-projec
 \url{https://doi.org/10.24432/C5XW20}.
 \end{thebibliography}
 
+\clearpage
 \appendix
 \section{Data dictionary}\label{app:dict}
 
